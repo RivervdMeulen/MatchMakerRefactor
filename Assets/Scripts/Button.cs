@@ -4,20 +4,12 @@ using UnityEngine.EventSystems;
 
 public class Button : MonoBehaviour, IEvents {
 
+	//Objects to be activated on button interaction
 	[SerializeField]
 	private GameObject[] activations;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	public void OnClicked () {
+		//For every object, activate it
 		for (int i = 0; i < activations.Length; i++) {
 			ExecuteEvents.Execute<IEvents> (activations[i], null, (x, y) => x.OnClicked());
 		}

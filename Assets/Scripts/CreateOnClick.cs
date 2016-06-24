@@ -4,15 +4,19 @@ using UnityEngine.EventSystems;
 
 public class CreateOnClick : MonoBehaviour, IEvents {
 
+	//Object you want to spawn
 	[SerializeField]
 	private GameObject spawnObject;
 
+	//Where you want to spawn the object
 	[SerializeField]
 	private Vector3 spawnLocation;
 
+	//If you want to keep spawning the object
 	[SerializeField]
 	private bool repeat;
 
+	//How often you want to repeat spawning the object
 	[SerializeField]
 	private int repeatAmount;
 
@@ -21,20 +25,18 @@ public class CreateOnClick : MonoBehaviour, IEvents {
 
 	// Use this for initialization
 	void Start () {
+		//Remember repeat amount
 		repeatNew = repeatAmount;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 
 	public void OnClicked () {
+		//On activation, reset then start spawning
 		repeatAmount = repeatNew;
 		SpawnObjects ();
 	}
 
 	void SpawnObjects () {
+		//Spawn object, then check if another object needs to be spawned
 		if (spawning) {
 			Instantiate(spawnObject, spawnLocation, Quaternion.identity);
 			spawning = false;
@@ -42,6 +44,7 @@ public class CreateOnClick : MonoBehaviour, IEvents {
 		}
 	}
 
+	//Check if other object needs to be spawned, if yes, spawn it
 	private IEnumerator spawnDelay () {
 		yield return new WaitForSeconds (1);
 		spawning = true;
